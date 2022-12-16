@@ -1,4 +1,4 @@
-import Content from './Content';
+import Content from './content';
 
 interface NotificationProps {
   recipientId: string;
@@ -11,8 +11,11 @@ interface NotificationProps {
 export class Notification {
   private props: NotificationProps;
 
-  constructor(props: NotificationProps) {
-    this.props = props;
+  constructor(props: Omit<NotificationProps, 'createdAt'>) {
+    this.props = {
+      ...props,
+      createdAt: new Date(),
+    };
   }
 
   public set recipientId(recipientId: string) {
