@@ -1,5 +1,5 @@
 import { Content } from './content';
-import { Notification } from './Notification';
+import { Notification } from './notification';
 
 describe('Notification', () => {
   const data = {
