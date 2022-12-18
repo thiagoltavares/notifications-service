@@ -1,17 +1,7 @@
-import { Notification } from '../entities/notification/notification';
-import { NotificationsRepository } from '../repository/notifications-repository';
-
+import { InMemoryNotificationsRepository } from '../../../test/repositories/in-memory-notifications-repository';
 import { SendNotification } from './send-notification';
 
-const notifications: Notification[] = [];
-
-class postgresRepository extends NotificationsRepository {
-  async create(notification: Notification) {
-    notifications.push(notification);
-  }
-}
-
-const notificationsRepository = new postgresRepository();
+const notificationsRepository = new InMemoryNotificationsRepository();
 
 describe('Send Notification', () => {
   it('should be able to send notification', async () => {
@@ -23,6 +13,7 @@ describe('Send Notification', () => {
       recipientId: 'example-recipient-id',
     });
 
-    expect(notifications).toHaveLength(1);
+    expect(notificationsRepository.notifications).toHaveLength(1);
+    expect(notificationsRepository.notifications[0]).toEqual(notification);
   });
 });
