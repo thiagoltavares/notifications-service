@@ -1,4 +1,4 @@
-export default class Content {
+export class Content {
   private content: string;
 
   get value() {
