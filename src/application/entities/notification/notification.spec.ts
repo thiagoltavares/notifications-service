@@ -9,6 +9,7 @@ describe('Notification', () => {
   };
 
   const content = new Notification(data);
+
   it('should be able to create a notification', () => {
     expect(content).toBeTruthy();
     expect(content.category).toEqual(data.category);
