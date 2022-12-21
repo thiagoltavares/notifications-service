@@ -10,12 +10,18 @@ interface NotificationProps {
   canceledAt?: Date | null;
 }
 
+type MakeOptional<Type, Key extends keyof Type> = Omit<Type, Key> &
+  Partial<Pick<Type, Key>>;
+
 export class Notification {
   private _id: string;
   private props: NotificationProps;
 
-  constructor(props: Omit<NotificationProps, 'createdAt'>) {
-    this._id = randomUUID();
+  constructor(
+    props: MakeOptional<NotificationProps, 'createdAt'>,
+    id?: string,
+  ) {
+    this._id = id ?? randomUUID();
     this.props = {
       ...props,
       createdAt: new Date(),
